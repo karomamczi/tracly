@@ -1,0 +1,40 @@
+@function random-range($min, $max) {
+  $random: random();
+  $random-range: $min + floor($random * (($max - $min) + 1));
+  @return $random-range;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+  $total: 60;
+
+  @for $i from 1 through $total {
+    $random-x: random(1000000) * 0.0001vw;
+    $random-offset: random-range(-100000, 100000) * 0.0001vw;
+    $random-x-end: $random-x + $random-offset;
+    $fall-duration: random-range(10, 30) * 1s;
+    $fall-delay: random(30) * -1s;
+
+    &:nth-child(#{$i}) {
+      transform: translateX($random-x);
+      animation: fallDown-#{$i} $fall-duration $fall-delay linear infinite;
+    }
+
+    @keyframes fallDown-#{$i} {
+      from {
+        transform: translate($random-x-end, -10vh);
+      }
+      to {
+        transform: translate($random-x-end, 100vh);
+      }
+    }
+  }
+}
+
+:host {
+  display: flex;
+}
