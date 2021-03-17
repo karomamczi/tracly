@@ -21,14 +21,18 @@
 
     &:nth-child(#{$i}) {
       transform: translateX($random-x);
-      animation: fallDown-#{$i} $fall-duration $fall-delay linear infinite;
+      animation: fall-down-#{$i} $fall-duration $fall-delay linear infinite;
     }
 
-    @keyframes fallDown-#{$i} {
+    @keyframes fall-down-#{$i} {
       from {
+        -webkit-transform: translate($random-x-end, -10vh);
+        -ms-transform: translate($random-x-end, -10vh);
         transform: translate($random-x-end, -10vh);
       }
       to {
+        -webkit-transform: translate($random-x-end, 100vh);
+        -ms-transform: translate($random-x-end, 100vh);
         transform: translate($random-x-end, 100vh);
       }
     }
